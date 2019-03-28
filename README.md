@@ -4,6 +4,8 @@ This simulated CPU has a single register, "current" and supports a very small nu
 
 There is no binary format to the instructions; only a simplified text format. Memory is available: 1024 32-bit int slots.
 
+Here's a [python implementation via Google Colab](https://colab.research.google.com/drive/1ErPNgmszPVVzrPSJwdv_JG_Ge3boVTG6).
+
 ## Executable factorial(5) program
 
 This is what works with the current system:
