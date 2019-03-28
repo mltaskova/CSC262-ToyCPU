@@ -12,7 +12,7 @@ loop:
   # if (n == 0) finished! 
   goto done ifz
 
-  # n *= fact
+  # fact *= n
   mul fact
   store fact
 
