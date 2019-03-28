@@ -61,6 +61,12 @@ public class Instruction {
 				+ ")";
 	}
 	
+	/**
+	 * Read an assembly instruction from a given line from a file.
+	 * @param lineNum - to report errors.
+	 * @param input - the line the try and interpret.
+	 * @return and Instruction object.
+	 */
 	public static Instruction parse(int lineNum, String input) {
 		LinkedList<String> words = new LinkedList<>(Arrays.asList(input.trim().split("\\s+")));
 		

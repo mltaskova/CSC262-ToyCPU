@@ -1,0 +1,23 @@
+  load 5
+  store n
+  store fact
+
+loop:
+
+  # n -= 1
+  load n
+  sub 1
+  store n
+
+  # if (n == 0) finished! 
+  goto done ifz
+
+  # n *= fact
+  mul fact
+  store fact
+
+  goto loop
+
+done:
+  # load the computed value to the "current" register
+  load fact

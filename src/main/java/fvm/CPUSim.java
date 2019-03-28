@@ -68,6 +68,9 @@ public class CPUSim {
 		throw new IllegalArgumentException("What value for " + instr);
 	}
 
+	/**
+	 * Run a single instruction.
+	 */
 	public void exec() {
 		Instruction instr = this.code.get(this.pc);
 		this.pc += 1;
@@ -148,26 +151,30 @@ public class CPUSim {
 		}
 	}
 	
+	/**
+	 * Hardcoded factorial 5 program.
+	 * @param args (none)
+	 */
 	public static void main(String[] args) {
 		int N = 1;
 		int fact = 0;
 		// fib
-		List<Instruction> fibonacci = new ArrayList<>();
-		fibonacci.add(new Instruction(Opcode.Load, null, 5, false));
-		fibonacci.add(new Instruction(Opcode.Store, N, null, false));
-		fibonacci.add(new Instruction(Opcode.Store, fact, null, false));
+		List<Instruction> factorial = new ArrayList<>();
+		factorial.add(new Instruction(Opcode.Load, null, 5, false));
+		factorial.add(new Instruction(Opcode.Store, N, null, false));
+		factorial.add(new Instruction(Opcode.Store, fact, null, false));
 		// 3: n--
-		fibonacci.add(new Instruction(Opcode.Load, N, null, false));
-		fibonacci.add(new Instruction(Opcode.Sub, null, 1, false));
-		fibonacci.add(new Instruction(Opcode.Store, N, null, false));
-		fibonacci.add(new Instruction(Opcode.GotoRel, null, 3, true));
-		fibonacci.add(new Instruction(Opcode.Mul, fact, null, false));
-		fibonacci.add(new Instruction(Opcode.Store, fact, null, false));
-		fibonacci.add(new Instruction(Opcode.GotoAbs, null, 3, false));
+		factorial.add(new Instruction(Opcode.Load, N, null, false));
+		factorial.add(new Instruction(Opcode.Sub, null, 1, false));
+		factorial.add(new Instruction(Opcode.Store, N, null, false));
+		factorial.add(new Instruction(Opcode.GotoRel, null, 3, true));
+		factorial.add(new Instruction(Opcode.Mul, fact, null, false));
+		factorial.add(new Instruction(Opcode.Store, fact, null, false));
+		factorial.add(new Instruction(Opcode.GotoAbs, null, 3, false));
 		// 10: load fact:
-		fibonacci.add(new Instruction(Opcode.Load, fact, null, false));
+		factorial.add(new Instruction(Opcode.Load, fact, null, false));
 
-		CPUSim sim = new CPUSim(fibonacci);
+		CPUSim sim = new CPUSim(factorial);
 		while(!sim.done()) {
 			sim.exec();
 		}
