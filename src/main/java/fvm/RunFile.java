@@ -37,8 +37,8 @@ public class RunFile {
 			Instruction temp;
 			lineNum = 0;
 			for (ASMLine line : code){
+				temp = line.toInstruction(vars, labels, lineNum);
 				lineNum++;
-				temp = line.toInstruction(vars, labels);
 				if (temp != null)
 					asmCode.add(temp);
 			}

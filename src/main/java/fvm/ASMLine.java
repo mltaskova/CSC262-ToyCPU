@@ -65,14 +65,16 @@ public class ASMLine {
         return labels;
     }
 
-    public Instruction toInstruction(HashMap<String, Integer> vars, HashMap<String, Integer> labels){
+    public Instruction toInstruction(HashMap<String, Integer> vars, HashMap<String, Integer> labels, Integer lineNum){
         if (this.op == null){
             //its a label
             return null;
         }
         else{
-            if (this.op.equals(Opcode.GotoAbs) || this.op.equals(Opcode.GotoRel))
+            if (this.op.equals(Opcode.GotoAbs))
                 return new Instruction(this.op, vars.get(this.label), labels.get(this.address), this.ifZero);
+            else if (this.op.equals(Opcode.GotoRel))
+                return new Instruction(this.op, vars.get(this.label), Math.abs(lineNum -labels.get(this.address)), this.ifZero);
             return new Instruction(this.op, vars.get(this.address), this.immediate, this.ifZero);
         }
     }

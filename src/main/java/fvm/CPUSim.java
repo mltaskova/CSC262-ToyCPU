@@ -87,9 +87,11 @@ public class CPUSim {
 		switch (instr.op) {
 		// Current Register manipulation:
 		case Print:
+			System.out.print("Factorial is: ");
 			System.out.println(this.current);
 			break;
 		case Prompt:
+			System.out.print("Enter number: ");
 			Scanner reader = new Scanner(System.in);
 			this.current = reader.nextInt();
 			reader.close();
@@ -127,7 +129,7 @@ public class CPUSim {
 			this.pc = getValue(instr);
 			break;
 		case GotoRel:
-			this.pc = getValue(instr);
+			this.pc += getValue(instr);
 			break;
 		
 		// Boolean operations:
