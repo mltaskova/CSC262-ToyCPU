@@ -1,4 +1,4 @@
-  load 5
+  prompt
   store n
   store fact
 
@@ -21,3 +21,4 @@ loop:
 done:
   # load the computed value to the "current" register
   load fact
+  print

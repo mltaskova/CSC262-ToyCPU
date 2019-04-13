@@ -80,7 +80,7 @@ done:
 
 ### (20) Load the higher-level language bits:
 
-- Construct a class ``ASMLine`` similar to Instruction that has its own parse method (arguments can now be strings!).
+- Construct a class ``fvm.ASMLine`` similar to Instruction that has its own parse method (arguments can now be strings!).
 
 ### (20) Variable Numbering
 - Loop through this program, collecting all unique variables mentioned.
@@ -88,9 +88,9 @@ done:
 - Output raw assembly.
 
 ### (20) Label Numbering
-- Convert your ``ASMLine`` labels to not be part of the instruction sequence, but owned by whatever instruction follows them.
-- You'll need a way to mark labels on your ``ASMLine`` class.
+- Convert your ``fvm.ASMLine`` labels to not be part of the instruction sequence, but owned by whatever instruction follows them.
+- You'll need a way to mark labels on your ``fvm.ASMLine`` class.
 - Convert the higher-level "goto" statement to either "goto-rel" or "goto-abs" lower-level commands.
 
 ### (10) Experience
-- Support directly converting ``ASMLine`` programs to ``Instruction`` programs so that they can be run directly.
+- Support directly converting ``fvm.ASMLine`` programs to ``Instruction`` programs so that they can be run directly.

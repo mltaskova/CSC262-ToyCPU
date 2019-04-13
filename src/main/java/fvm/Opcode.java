@@ -1,7 +1,7 @@
 package fvm;
 
 public enum Opcode {
-	Load, Store, AtomicIncr, AtomicDecr, Add, Mul, Div, Sub, Not, And, Or, GotoAbs, GotoRel;
+	Print, Prompt, Load, Store, AtomicIncr, AtomicDecr, Add, Mul, Div, Sub, Not, And, Or, GotoAbs, GotoRel;
 	
 	/**
 	 * Convert a string from an assembly file into a Opcode.
@@ -10,6 +10,10 @@ public enum Opcode {
 	 */
 	public static Opcode fromString(String x) {
 		switch (x.toLowerCase()) {
+		case "print":
+			return Print;
+		case "prompt":
+			return Prompt;
 		case "load":
 			return Load;
 		case "store":

@@ -2,6 +2,7 @@ package fvm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * This class represents a simulated CPU.
@@ -74,7 +75,6 @@ public class CPUSim {
 	public void exec() {
 		Instruction instr = this.code.get(this.pc);
 		this.pc += 1;
-		
 		if (instr.ifZero) {
 			if (this.current != 0) {
 				// Skip this instruction.
@@ -86,6 +86,14 @@ public class CPUSim {
 
 		switch (instr.op) {
 		// Current Register manipulation:
+		case Print:
+			System.out.println(this.current);
+			break;
+		case Prompt:
+			Scanner reader = new Scanner(System.in);
+			this.current = reader.nextInt();
+			reader.close();
+			break;
 		case Load:
 			this.current = this.getValue(instr);
 			break;
@@ -119,7 +127,7 @@ public class CPUSim {
 			this.pc = getValue(instr);
 			break;
 		case GotoRel:
-			this.pc += getValue(instr);
+			this.pc = getValue(instr);
 			break;
 		
 		// Boolean operations:

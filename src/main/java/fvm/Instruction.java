@@ -73,7 +73,7 @@ public class Instruction {
 		if (words.isEmpty()) {
 			return null;
 		}
-		
+
 		Opcode op = Opcode.fromString(words.poll());
 		Integer imm = null;
 		Integer address = null;

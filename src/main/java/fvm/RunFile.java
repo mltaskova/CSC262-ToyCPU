@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RunFile {
@@ -13,7 +14,10 @@ public class RunFile {
 	 * @return a list of code instructions to run.
 	 */
 	public static List<Instruction> loadASMFile(File path) {
-		List<Instruction> code = new ArrayList<>();
+		List<ASMLine> code = new ArrayList<>();
+		List<Instruction> asmCode = new ArrayList<>();
+		HashMap<String, Integer> vars;
+		HashMap<String, Integer> labels;
 		try {
 			int lineNum = 0;
 			for (String line : Files.readAllLines(path.toPath())) {
@@ -26,12 +30,22 @@ public class RunFile {
 				if (line.isEmpty()) {
 					continue;
 				}
-				code.add(Instruction.parse(lineNum, line));
+				code.add(ASMLine.parse(lineNum, line));
+			}
+			vars = ASMLine.varNum(code);
+			labels = ASMLine.labelNum(code);
+			Instruction temp;
+			lineNum = 0;
+			for (ASMLine line : code){
+				lineNum++;
+				temp = line.toInstruction(vars, labels);
+				if (temp != null)
+					asmCode.add(temp);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		return code;
+		return asmCode;
 	}
 
 	/**
@@ -39,7 +53,7 @@ public class RunFile {
 	 * @param args - the first argument is a file to run.
 	 */
 	public static void main(String[] args) {
-		String file = "src/main/resources/factorial.asm";
+		String file = "src/main/resources/factorial.masm";
 		if (args.length >= 1) {
 			file = args[0];
 		}
@@ -51,7 +65,7 @@ public class RunFile {
 		while (!sim.done()) {
 			sim.exec();
 		}
-		System.out.println(sim.current);
+//		System.out.println(sim.current);
 
 	}
 }
